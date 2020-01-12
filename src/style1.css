@@ -1,0 +1,14 @@
+.container{
+    padding: 1rem;
+    background-color: #8fcaf1;
+    color: black;
+    text-align: center;
+}
+h2{
+    color: white;
+}
+button{
+    background-color: #0099ff;
+    width: 15rem;
+    height: 4rem;
+}
