@@ -1,0 +1,39 @@
+.container{
+    background-color: rgb(127, 182, 216);
+    text-align: center;
+    color: #021433;
+    padding: 1rem 1rem 1rem;
+}
+
+p{
+    font-size: 21px;
+}
+
+.flex-container{
+    display: flex;
+    padding: 0rem 2rem;
+    margin-bottom: 5px;
+    justify-content: center;
+}
+ 
+button{
+    background-color: #021433;
+    color: #f8f8f8;
+    border: 0rem;
+    padding: 1rem 4rem 1rem;
+}
+
+.button{
+    background-color: white;
+    color: #021433;
+    padding: 1rem 1rem 1rem;
+}
+
+.box{
+    border: 0rem;
+    width: 91%;
+    text-align: left;
+    height: 40px;
+    color:grey;
+    margin-bottom: 25px;
+}
