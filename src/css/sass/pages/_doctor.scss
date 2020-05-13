@@ -12,7 +12,7 @@
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-			justify-content: center;
+			justify-content: center; 
 			&__heading{
 				font-family: $nexa-light;
 				font-size: 3rem;
@@ -63,20 +63,50 @@
 		&__col-2{
 			grid-template-columns: 100%;
 			grid-row-gap: 1rem; 
+			height: min-content;
 			&__card{
 				display: grid;
 				border: .1rem solid #bbb;
-				height: 60rem;
 				overflow: hidden;
+				height: min-content;
 				&__name{
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
 					position: relative;
 					font-family: $nexa-bold;
+					i{
+						font-size: 1.5rem;
+						color: #777;
+						margin-right: 1rem;
+					}
 					h3{
 						color: $bright-blue;
 						font-size: 2rem;
 						line-height: 3rem;
 						margin: 1rem 0rem;
 						padding-left: 5rem; 	
+					}
+					.doctor_menu_container{
+						position: absolute;
+						background-color: $background-color;
+						right: 1rem;
+						top: 4rem;
+						.doctor_menu{
+							display: flex;
+							flex-direction: column;
+							grid-gap: 1rem;
+							justify-content: flex-end;
+							a{
+								text-decoration: none;
+								color: $dark-blue;
+							}
+							&_item{
+								text-align: right;
+								font-size: 1.2rem;
+							}
+						}
 					}
 					&:before{
 						content: '';
@@ -118,7 +148,7 @@
 					font-size: 1.5rem;
 					padding: 1rem 3rem;
 					margin-top: 1rem;
-					margin: 1rem 6rem;
+					margin: 1rem calc(25%);
 				}
 				&__doctor_img_wrapper{
 					width: 100%;
@@ -127,7 +157,154 @@
 						width: 100%;
 						height: 100%;
 					}
-					
+				}
+				.time_slot--reschedule{
+					display: block;
+				}
+				&__time_slot{
+					display: none;
+					flex-direction: column;
+					grid-gap: 1rem;
+					padding: 1rem 4rem;
+					border-top: 1px solid #ccc;
+					grid-column: 1/-1;
+					h4{
+						font-family: $nexa-bold;
+						color: $bright-blue;
+					}
+					.legend{
+						display: flex;
+						flex-wrap: wrap;
+						grid-gap: 2.5rem;
+						&-item{
+							font-family: $nexa-bold;
+							position: relative;
+							color: $bright-blue;
+							&::before{
+								content: '';
+								display: block;
+								position: relative;
+								left: -1.5rem;
+								top: 50%;
+								width: 1rem;
+								height: 1rem;
+								background-color: $bright-blue;
+							}
+							&-red{
+								color: red;
+								&::before{
+									content: '';
+									background-color: red;
+								}
+							}
+							&-purple{
+								color: purple;
+								&::before{
+									content: '';
+									background-color: purple;
+								}
+							}
+							&-green{
+								color: green;
+								&::before{
+									content: '';
+									background-color: green;
+								}
+							}
+						}
+					}
+					.time-slots-header{
+						width: 100%;
+						display: flex;
+						flex-direction: row;
+						grid-gap: 2rem;
+						margin-bottom: 1rem;
+						justify-content: space-between;
+						align-items: center;
+						&-controls{
+							width: 3rem;
+							height: 3rem;
+							border: 1px solid #777;
+							border-radius: 50%;
+							position: relative;
+							i{
+								position: relative;
+								left: 50%;
+								top: 50%;
+								transform: translate(-50%, -50%);
+								font-size: 1.5rem;
+								color: $bright-blue;
+							}
+						}
+						.carousel-dates{
+							display: flex;
+							flex-direction: row;
+							justify-content: space-between;
+							width: 100%;
+							overflow: hidden;
+							.date-heading{
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								grid-gap: 1rem;
+								padding: 1rem 0rem;
+								border-bottom: 2px solid #ccc;
+								flex-basis: 33%;
+								min-width: 33%;
+								.day-date{
+									text-align: center;
+									color: #777;
+									font-family: $nexa-bold;
+								}
+								.day-slots-available{
+									text-align: center;
+									color: green;
+									font-family: $nexa-bold;
+								}
+								&--active{
+									border-bottom: 2px solid $bright-blue;
+									.day-date{
+										color: $bright-blue;
+									}
+								}
+							}
+						}
+					}
+					.time-slots-container{
+						display: flex;
+						justify-content: flex-start;
+						overflow: hidden;
+					}
+					.time-slots{
+						flex-basis: 100%;
+						min-width: 100%;
+						display: flex;
+						flex-wrap: wrap;
+						grid-gap: .5rem;
+						
+						.slot{
+							display: inline;
+							line-height: 2rem;
+							border-radius: .5rem;
+							border: 1px solid $bright-blue;
+							padding: .7rem;
+							font-family: $nexa-bold;
+							color: $bright-blue;
+							max-height: 3.5rem;
+							&-red{
+								border: 1px solid red;
+								color: red;
+							}
+							&-purple{
+								border: 1px solid purple;
+								color: purple;
+							}
+							&-green{
+								border: 1px solid green;
+								color: green;
+							}
+						}	
+					}
 				}
 			}
 		}
@@ -224,17 +401,28 @@
 			}
 			&__col-2{
 				&__card{
-					height: 26rem;
 					grid-template-columns: 6fr 4fr;
-					grid-template-rows: 1fr 3fr 0fr;
 					&__name{
+						display: flex;
+						/* padding: 0rem 1rem; */
+						flex-direction: row;
+						align-items: center;
+						justify-content: space-between;
 						grid-column: 1/2;
 						grid-row: 1/2;
+						i{
+							font-size: 1.5rem;
+							color: #777;
+							margin-right: 2rem;
+						}
 						h3{
 							font-size: 1.7rem;
 						}
 						&:before{
 							top:47%;
+						}
+						.doctor_menu_container{
+							right: 2rem;
 						}
 					}
 					&__other_details{
@@ -259,7 +447,7 @@
 					}
 					&__doctor_img_wrapper{
 					width: 100%;
-					height: 100%;
+					height: 26rem;
 					grid-row: 1/-1;
 					grid-column: 2/3;
 					&__img{
@@ -323,6 +511,33 @@
 						&__tags{
 							margin-top: 1rem;
 							padding-left: 1.5rem;
+							.filter_button{
+								border: 1px solid $bright-blue;
+								border-radius: 1rem;
+								padding: .5rem;
+								display: inline;
+								line-height: 3rem;
+								white-space: nowrap;
+								p{
+									font-size: 1rem;
+									font-family: $nexa-bold;
+									color: $bright-blue;
+									display: inline-block;
+								}
+								button{
+									background-color: $bright-blue;
+									border: none;
+									border-radius: 50%;
+									width: 1.5rem;
+									position: relative;
+									i{
+										position: relative;
+										transform: translateX(-50%);
+										color: $background-color;
+										font-size: 1.25rem;
+									}
+								}
+							}
 							&__tag{
 								position: relative;
 								font-size: 1rem;
@@ -348,6 +563,9 @@
 			&__col-2{
 				&__card{
 					&__name{
+						a{
+							text-decoration: none;
+						}
 						h3{
 							font-size: 2rem;
 							padding-left: 4rem;
