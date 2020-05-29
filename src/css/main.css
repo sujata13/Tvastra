@@ -266,6 +266,7 @@ html, body {
   padding: 2rem 2rem;
   width: 100%;
   height: 100%;
+  align-items: center;
   height: 6rem;
 }
 .navbar__logo {
@@ -275,33 +276,47 @@ html, body {
   width: 10rem;
   height: auto;
 }
+.navbar__profile {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 0.5rem;
+  font-family: "Nexa Bold";
+}
 .navbar__menu {
   display: none;
 }
 .navbar__buttons {
   display: none;
+  max-width: 28rem;
+}
+.navbar__buttons #get-a-quote {
+  grid-column: 2/3;
 }
 .navbar__burger {
   color: #525659;
   display: inline;
   font-size: 1.5rem;
   align-self: center;
+  margin-right: 1rem;
+}
+.navbar .profile_section {
+  display: none;
 }
 .navbar__side_menu {
   display: none;
   position: fixed;
   background-color: white;
   height: 100%;
-  width: 55%;
+  width: 100vw;
   z-index: 1000;
-  right: 0;
+  left: 0;
   top: 0;
   padding: 2rem;
 }
 .navbar__side_menu__ul {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   list-style-type: none;
 }
 .navbar__side_menu__ul__item {
@@ -312,12 +327,99 @@ html, body {
   font-weight: 600;
   letter-spacing: 0.1rem;
 }
-.navbar__side_menu__ul__item a, .navbar__side_menu__ul__item a:visited, .navbar__side_menu__ul__item a:hover, .navbar__side_menu__ul__item a:active {
+.navbar__side_menu__ul__item a, .navbar__side_menu__ul__item a:visited, .navbar__side_menu__ul__item a:active {
   text-decoration: none;
   color: #2a2d3e;
 }
+.navbar__side_menu__ul__item .treatments_side_menu li {
+  text-align: left;
+}
 .navbar .cross {
   font-size: 1.5rem;
+}
+
+.profile_menu_container, .treatment_menu_container {
+  background-color: white;
+  border: 1px solid #ddd;
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.profile_menu_container--admin, .treatment_menu_container--admin {
+  right: 3rem;
+  top: 5rem;
+}
+.profile_menu_container .profile_small_details, .treatment_menu_container .profile_small_details {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+.profile_menu_container .profile_small_details .profile_picture__container, .treatment_menu_container .profile_small_details .profile_picture__container {
+  width: 5rem;
+  height: 5rem;
+  align-self: center;
+  justify-self: start;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.profile_menu_container .profile_small_details .profile_picture__container img, .treatment_menu_container .profile_small_details .profile_picture__container img {
+  width: 100%;
+  height: 100%;
+}
+.profile_menu_container .profile_small_details .name_and_phone, .treatment_menu_container .profile_small_details .name_and_phone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.profile_menu_container .profile_small_details .name_and_phone a, .treatment_menu_container .profile_small_details .name_and_phone a {
+  text-decoration: none;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+.profile_menu_container .profile_small_details .name_and_phone .name, .treatment_menu_container .profile_small_details .name_and_phone .name {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+.profile_menu_container .profile_small_details .name_and_phone .phoneNumber, .treatment_menu_container .profile_small_details .name_and_phone .phoneNumber {
+  font-family: "Nexa Light";
+  font-size: 1.2rem;
+}
+.profile_menu_container .profile_menu, .treatment_menu_container .profile_menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.profile_menu_container .profile_menu__item, .treatment_menu_container .profile_menu__item {
+  padding: 2rem 1rem;
+  text-align: left;
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+}
+.profile_menu_container .profile_menu__item:hover, .treatment_menu_container .profile_menu__item:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+.profile_menu_container .profile_menu a, .treatment_menu_container .profile_menu a {
+  text-decoration: none;
+  color: #525659;
+}
+
+.display_none {
+  display: none;
+}
+
+.treatment_menu_container {
+  right: 50%;
+  transform: translateX(50%);
+}
+.treatment_menu_container .profile_menu__item {
+  text-align: center;
+}
+.treatment_menu_container:hover {
+  display: block;
 }
 
 @media (min-width: 768px) {
@@ -343,6 +445,11 @@ html, body {
   .navbar__side_menu__ul__item {
     font-size: 2rem;
   }
+
+  .profile_menu_container {
+    width: 25rem;
+    right: 18rem;
+  }
 }
 @media (min-width: 1024px) {
   .navbar {
@@ -351,10 +458,20 @@ html, body {
     height: 100%;
     height: 10rem;
   }
+  .navbar__profile {
+    padding: 1rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 1rem;
+    font-family: "Nexa Light";
+    font-size: 1.2rem;
+  }
   .navbar__menu {
     display: block;
     flex-grow: 2;
-    padding-left: 7rem;
     align-self: center;
   }
   .navbar__menu__ul {
@@ -363,6 +480,18 @@ html, body {
     list-style-type: none;
     justify-content: center;
   }
+  .navbar__menu__ul #treatments {
+    position: relative;
+  }
+  .navbar__menu__ul #treatments:hover {
+    color: #0173b2;
+  }
+  .navbar__menu__ul #treatments:hover #treatment_menu_container {
+    display: block;
+  }
+  .navbar__menu__ul #treatments i {
+    font-size: 1.2rem;
+  }
   .navbar__menu__ul__item {
     font-family: "Nexa Light";
     font-size: 1.5rem;
@@ -370,13 +499,26 @@ html, body {
     margin-left: 3rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
+    padding: 4rem 0rem;
   }
-  .navbar__menu__ul__item a, .navbar__menu__ul__item a:visited, .navbar__menu__ul__item a:hover, .navbar__menu__ul__item a:active {
+  .navbar__menu__ul__item a, .navbar__menu__ul__item a:visited, .navbar__menu__ul__item a:active {
     text-decoration: none;
     color: #2a2d3e;
   }
+  .navbar__menu__ul__item a:hover {
+    color: #0173b2;
+  }
+  .navbar__menu__ul__item a.navbar__menu__ul__item--active {
+    color: #0173b2;
+  }
   .navbar__side_menu {
     display: none;
+  }
+  .navbar .profile_section {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    grid-gap: 1rem;
   }
   .navbar__buttons {
     display: grid;
@@ -387,7 +529,8 @@ html, body {
   .navbar__buttons__button-link {
     justify-self: end;
   }
-  .navbar__buttons-login {
+  .navbar__buttons-tvastra-plus {
+    cursor: pointer;
     padding: 1rem 1.8rem;
     color: #2a2d3e;
     border: 1px solid #2a2d3e;
@@ -395,10 +538,19 @@ html, body {
     font-family: "Nexa Light";
     letter-spacing: 0.05rem;
     font-weight: 600;
-    background-color: white;
+    background-color: #0173b2;
+    color: white;
     font-size: 1.2rem;
+    padding: 1rem 2.6rem;
+    border-color: #0173b2;
+    transition: 0.3s color, 0.3s background-color;
+  }
+  .navbar__buttons-tvastra-plus:hover {
+    background-color: white;
+    color: #0173b2;
   }
   .navbar__buttons-quote {
+    cursor: pointer;
     padding: 1rem 1.8rem;
     color: #2a2d3e;
     border: 1px solid #2a2d3e;
@@ -410,9 +562,33 @@ html, body {
     color: white;
     padding: 1rem 2.6rem;
     font-size: 1.2rem;
+    transition: 0.3s color, 0.3s background-color;
+  }
+  .navbar__buttons-quote:hover {
+    background-color: white;
+    color: #2a2d3e;
   }
   .navbar .fa-bars {
     display: none;
+  }
+
+  .profile_menu_container, .treatment_menu_container {
+    position: absolute;
+    top: 7rem;
+    right: 10rem;
+    width: 25rem;
+    height: auto;
+  }
+
+  .treatment_menu_container {
+    right: 50%;
+    transform: translateX(50%);
+  }
+  .treatment_menu_container .profile_menu__item {
+    text-align: center;
+  }
+  .treatment_menu_container:hover {
+    display: block;
   }
 }
 .help {
@@ -513,6 +689,65 @@ html, body {
     font-size: 2rem;
   }
 }
+html {
+  overflow-x: hidden;
+}
+
+.doctor_details_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+}
+.doctor_details_modal form {
+  position: absolute;
+  background-color: white;
+  overflow: scroll;
+  width: 35rem;
+  height: 60rem;
+  padding: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  grid-gap: 2rem;
+  justify-content: flex-start;
+}
+.doctor_details_modal form .upload_display_picture_container {
+  width: 100%;
+}
+.doctor_details_modal form .form_container__form__submit {
+  padding: 2rem 11rem;
+}
+.doctor_details_modal form .form_container__form__input_field input {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  padding: 1rem 2rem;
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: #777;
+}
+.doctor_details_modal form .form_container__form__input_field--medical-records {
+  flex-direction: column;
+}
+.doctor_details_modal form .form_container__form__input_field--radio {
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.doctor_details_modal form .form_container__form__input_field .form_field_radio {
+  display: flex;
+  align-items: center;
+  grid-gap: 0.5rem;
+}
+
 .hero {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/img1.jpg");
   background-size: cover;
@@ -536,6 +771,24 @@ html, body {
 }
 .hero__container__field__search_location {
   position: relative;
+}
+.hero__container__field__search_location .city_autocomplete {
+  position: absolute;
+  background-color: white;
+  font-family: "Nexa Bold";
+  width: 100%;
+}
+.hero__container__field__search_location .city_autocomplete .auto_value {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+.hero__container__field__search_location .city_autocomplete .auto_value h4 span {
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #0173b2;
+  margin-left: 0.5rem;
 }
 .hero__container__field__search_location__district {
   position: relative;
@@ -570,6 +823,30 @@ html, body {
   font-family: "Nexa Light";
   font-size: 1.1rem;
   letter-spacing: 0.05rem;
+  width: 100%;
+  height: 100%;
+}
+.hero__container__field__search__doctor {
+  flex-grow: 1;
+  position: relative;
+}
+.hero__container__field__search__doctor .match-auto_complete {
+  position: absolute;
+  background-color: white;
+  font-family: "Nexa Bold";
+  width: 100%;
+}
+.hero__container__field__search__doctor .match-auto_complete .auto_value {
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+.hero__container__field__search__doctor .match-auto_complete .auto_value h4 span {
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #0173b2;
+  margin-left: 0.5rem;
 }
 .hero__container__field__search__button {
   padding: 1rem 1.8rem;
@@ -695,6 +972,7 @@ html, body {
   background-size: cover;
   background-position: -2rem -2rem;
   position: relative;
+  display: none;
 }
 .world_class_doctors__container__cards__card-1 {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--002.jpg");
@@ -708,6 +986,18 @@ html, body {
   background-position: 0.6rem;
 }
 .world_class_doctors__container__cards__card-4 {
+  background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--005.jpg");
+}
+.world_class_doctors__container__cards__card-5 {
+  background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--005.jpg");
+}
+.world_class_doctors__container__cards__card-6 {
+  background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--005.jpg");
+}
+.world_class_doctors__container__cards__card-7 {
+  background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--005.jpg");
+}
+.world_class_doctors__container__cards__card-8 {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--005.jpg");
 }
 .world_class_doctors__container__cards__card__description {
@@ -900,6 +1190,14 @@ html, body {
   }
 }
 @media (min-width: 768px) {
+  .doctor_details_modal form {
+    width: 50rem;
+    height: 60rem;
+  }
+  .doctor_details_modal form .form_container__form__submit {
+    padding: 2rem 18rem;
+  }
+
   .hero__container {
     padding: 2rem 3rem;
     width: 100%;
@@ -1045,6 +1343,21 @@ html, body {
   }
 }
 @media (min-width: 1024px) {
+  .doctor_details_modal form {
+    margin: 0;
+    width: 50rem;
+    height: 55rem;
+  }
+  .doctor_details_modal--upload-records form {
+    height: 45rem;
+    overflow: none;
+  }
+  .doctor_details_modal--upload-records form .close-form {
+    position: absolute;
+    right: 2rem;
+    font-size: 1.5rem;
+  }
+
   .hero {
     height: 40rem;
   }
@@ -1079,11 +1392,11 @@ html, body {
     letter-spacing: 0.05rem;
   }
   .hero__container__field__search_location__map-marker {
-    padding-top: 1.3rem;
+    padding-top: 0.8rem;
     padding-left: 2rem;
   }
   .hero__container__field__search_location__crosshairs {
-    padding-top: 1.3rem;
+    padding-top: 0.8rem;
     padding-right: 2rem;
   }
   .hero__container__field__search_location__crosshairs img {
@@ -1312,16 +1625,31 @@ html, body {
 .doctor_list__container__col-2, .hospital_list__container__col-2 {
   grid-template-columns: 100%;
   grid-row-gap: 1rem;
+  height: min-content;
+}
+.doctor_list__container__col-2 .no-result, .hospital_list__container__col-2 .no-result {
+  font-family: "Nexa Bold";
+  color: #0173b2;
+  text-align: center;
 }
 .doctor_list__container__col-2__card, .hospital_list__container__col-2__card {
   display: grid;
   border: 0.1rem solid #bbb;
-  height: 60rem;
   overflow: hidden;
+  height: min-content;
 }
 .doctor_list__container__col-2__card__name, .hospital_list__container__col-2__card__name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   font-family: "Nexa Bold";
+}
+.doctor_list__container__col-2__card__name i, .hospital_list__container__col-2__card__name i {
+  font-size: 1.5rem;
+  color: #777;
+  margin-right: 1rem;
 }
 .doctor_list__container__col-2__card__name h3, .hospital_list__container__col-2__card__name h3 {
   color: #0173b2;
@@ -1329,6 +1657,28 @@ html, body {
   line-height: 3rem;
   margin: 1rem 0rem;
   padding-left: 5rem;
+}
+.doctor_list__container__col-2__card__name .doctor_menu_container, .hospital_list__container__col-2__card__name .doctor_menu_container {
+  position: absolute;
+  background-color: white;
+  right: 1rem;
+  top: 4rem;
+}
+.doctor_list__container__col-2__card__name .doctor_menu_container .doctor_menu, .hospital_list__container__col-2__card__name .doctor_menu_container .doctor_menu {
+  display: flex;
+  border: 1px solid #0173b2;
+  padding: 1rem;
+  flex-direction: column;
+  grid-gap: 1rem;
+  justify-content: flex-end;
+}
+.doctor_list__container__col-2__card__name .doctor_menu_container .doctor_menu a, .hospital_list__container__col-2__card__name .doctor_menu_container .doctor_menu a {
+  text-decoration: none;
+  color: #2a2d3e;
+}
+.doctor_list__container__col-2__card__name .doctor_menu_container .doctor_menu_item, .hospital_list__container__col-2__card__name .doctor_menu_container .doctor_menu_item {
+  text-align: right;
+  font-size: 1.2rem;
 }
 .doctor_list__container__col-2__card__name:before, .hospital_list__container__col-2__card__name:before {
   content: "";
@@ -1370,7 +1720,7 @@ html, body {
   font-size: 1.5rem;
   padding: 1rem 3rem;
   margin-top: 1rem;
-  margin: 1rem 6rem;
+  margin: 1rem calc(25%);
 }
 .doctor_list__container__col-2__card__doctor_img_wrapper, .hospital_list__container__col-2__card__doctor_img_wrapper {
   width: 100%;
@@ -1379,6 +1729,181 @@ html, body {
 .doctor_list__container__col-2__card__doctor_img_wrapper__img, .hospital_list__container__col-2__card__doctor_img_wrapper__img {
   width: 100%;
   height: 100%;
+}
+.doctor_list__container__col-2__card .time_slot--reschedule, .hospital_list__container__col-2__card .time_slot--reschedule {
+  display: block;
+}
+.doctor_list__container__col-2__card__time_slot, .hospital_list__container__col-2__card__time_slot {
+  display: none;
+  flex-direction: column;
+  grid-gap: 1rem;
+  padding: 1rem 4rem;
+  border-top: 1px solid #ccc;
+  grid-column: 1/-1;
+}
+.doctor_list__container__col-2__card__time_slot h4, .hospital_list__container__col-2__card__time_slot h4 {
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .legend, .hospital_list__container__col-2__card__time_slot .legend {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 2.5rem;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item, .hospital_list__container__col-2__card__time_slot .legend-item {
+  font-family: "Nexa Bold";
+  position: relative;
+  color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item::before, .hospital_list__container__col-2__card__time_slot .legend-item::before {
+  content: "";
+  display: block;
+  position: relative;
+  left: -1.5rem;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  background-color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-red, .hospital_list__container__col-2__card__time_slot .legend-item-red {
+  color: red;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-red::before, .hospital_list__container__col-2__card__time_slot .legend-item-red::before {
+  content: "";
+  background-color: red;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-purple, .hospital_list__container__col-2__card__time_slot .legend-item-purple {
+  color: purple;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-purple::before, .hospital_list__container__col-2__card__time_slot .legend-item-purple::before {
+  content: "";
+  background-color: purple;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-green, .hospital_list__container__col-2__card__time_slot .legend-item-green {
+  color: green;
+}
+.doctor_list__container__col-2__card__time_slot .legend-item-green::before, .hospital_list__container__col-2__card__time_slot .legend-item-green::before {
+  content: "";
+  background-color: green;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header, .hospital_list__container__col-2__card__time_slot .time-slots-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  grid-gap: 2rem;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header-controls, .hospital_list__container__col-2__card__time_slot .time-slots-header-controls {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid #777;
+  border-radius: 50%;
+  position: relative;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header-controls i, .hospital_list__container__col-2__card__time_slot .time-slots-header-controls i {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-gap: 1rem;
+  padding: 1rem 0rem;
+  border-bottom: 2px solid #ccc;
+  flex-basis: 33%;
+  min-width: 33%;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading .day-date, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading .day-date {
+  text-align: center;
+  color: #777;
+  font-family: "Nexa Bold";
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading .day-slots-available, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading .day-slots-available {
+  text-align: center;
+  color: green;
+  font-family: "Nexa Bold";
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading--active, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading--active {
+  border-bottom: 2px solid #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading--active .day-date, .hospital_list__container__col-2__card__time_slot .time-slots-header .carousel-dates .date-heading--active .day-date {
+  color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots-container, .hospital_list__container__col-2__card__time_slot .time-slots-container {
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots, .hospital_list__container__col-2__card__time_slot .time-slots {
+  flex-basis: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 0.5rem;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-day-wise, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-day-wise {
+  min-width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  grid-row-gap: 1rem;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning {
+  display: flex;
+  flex-direction: row;
+  min-width: 100%;
+  flex-basis: 100%;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-heading, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-heading {
+  display: flex;
+  grid-gap: 0.5rem;
+  align-items: center;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-heading i, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-heading i {
+  font-size: 1.3rem;
+  color: #0173b2;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot {
+  display: inline;
+  line-height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #0173b2;
+  padding: 0.7rem;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+  max-height: 3.5rem;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-red, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-red {
+  border: 1px solid red;
+  color: red;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-purple, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-purple {
+  border: 1px solid purple;
+  color: purple;
+}
+.doctor_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-green, .hospital_list__container__col-2__card__time_slot .time-slots .time-slot-morning .time-slot-day-wise-slots .slot-green {
+  border: 1px solid green;
+  color: green;
 }
 
 @media (min-width: 768px) {
@@ -1412,7 +1937,7 @@ html, body {
     grid-template-rows: 1fr 2fr 1fr;
     align-items: center;
     border-bottom: 0.1rem solid #bbb;
-    height: 25rem;
+    height: auto;
     font-family: "Nexa Light";
   }
   .doctor_list__container__col-1__filter:last-child, .hospital_list__container__col-1__filter:last-child {
@@ -1447,6 +1972,7 @@ html, body {
     grid-column: 1/6;
     grid-row: 2/3;
     display: grid;
+    align-self: start;
     grid-gap: 0.5rem;
     grid-template-columns: 100%;
   }
@@ -1472,19 +1998,33 @@ html, body {
     margin-right: 1rem;
   }
   .doctor_list__container__col-2__card, .hospital_list__container__col-2__card {
-    height: 26rem;
     grid-template-columns: 6fr 4fr;
-    grid-template-rows: 1fr 3fr 0fr;
   }
   .doctor_list__container__col-2__card__name, .hospital_list__container__col-2__card__name {
+    display: flex;
+    /* padding: 0rem 1rem; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     grid-column: 1/2;
     grid-row: 1/2;
+  }
+  .doctor_list__container__col-2__card__name i, .hospital_list__container__col-2__card__name i {
+    font-size: 1.5rem;
+    color: #777;
+    margin-right: 2rem;
   }
   .doctor_list__container__col-2__card__name h3, .hospital_list__container__col-2__card__name h3 {
     font-size: 1.7rem;
   }
+  .doctor_list__container__col-2__card__name h3 span i, .hospital_list__container__col-2__card__name h3 span i {
+    color: green;
+  }
   .doctor_list__container__col-2__card__name:before, .hospital_list__container__col-2__card__name:before {
     top: 47%;
+  }
+  .doctor_list__container__col-2__card__name .doctor_menu_container, .hospital_list__container__col-2__card__name .doctor_menu_container {
+    right: 2rem;
   }
   .doctor_list__container__col-2__card__other_details, .hospital_list__container__col-2__card__other_details {
     grid-column: 1/2;
@@ -1508,7 +2048,7 @@ html, body {
   }
   .doctor_list__container__col-2__card__doctor_img_wrapper, .hospital_list__container__col-2__card__doctor_img_wrapper {
     width: 100%;
-    height: 100%;
+    height: 26rem;
     grid-row: 1/-1;
     grid-column: 2/3;
   }
@@ -1563,6 +2103,36 @@ html, body {
   .doctor_list__container__col-1__filter-by__tags, .hospital_list__container__col-1__filter-by__tags {
     margin-top: 1rem;
     padding-left: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-gap: 0.5rem;
+  }
+  .doctor_list__container__col-1__filter-by__tags .filter_button, .hospital_list__container__col-1__filter-by__tags .filter_button {
+    border: 1px solid #0173b2;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    display: inline;
+    white-space: nowrap;
+  }
+  .doctor_list__container__col-1__filter-by__tags .filter_button p, .hospital_list__container__col-1__filter-by__tags .filter_button p {
+    font-size: 1rem;
+    font-family: "Nexa Bold";
+    color: #0173b2;
+    display: inline-block;
+  }
+  .doctor_list__container__col-1__filter-by__tags .filter_button button, .hospital_list__container__col-1__filter-by__tags .filter_button button {
+    background-color: #0173b2;
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    position: relative;
+  }
+  .doctor_list__container__col-1__filter-by__tags .filter_button button i, .hospital_list__container__col-1__filter-by__tags .filter_button button i {
+    position: relative;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.25rem;
   }
   .doctor_list__container__col-1__filter-by__tags__tag, .hospital_list__container__col-1__filter-by__tags__tag {
     position: relative;
@@ -1583,6 +2153,9 @@ html, body {
   }
   .doctor_list__container__col-2__card, .hospital_list__container__col-2__card {
     grid-template-columns: 10fr 4fr;
+  }
+  .doctor_list__container__col-2__card__name a, .hospital_list__container__col-2__card__name a {
+    text-decoration: none;
   }
   .doctor_list__container__col-2__card__name h3, .hospital_list__container__col-2__card__name h3 {
     font-size: 2rem;
@@ -1742,6 +2315,60 @@ html, body {
     margin: 0rem 4rem 4rem;
   }
 }
+.error_container {
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  align-items: center;
+  grid-column-gap: 1rem;
+  padding: 1rem 2rem;
+  background-color: white;
+  width: 40rem;
+  height: 6rem;
+  color: red;
+  position: absolute;
+  top: 11rem;
+  right: 1rem;
+  border-left: 4px solid red;
+  box-shadow: 0px 0px 2rem rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 375px) {
+  .error_container {
+    width: 30rem;
+  }
+}
+.error_container--success {
+  border-left: 4px solid green;
+  color: green;
+}
+.error_container--success .col--2 #cancelLogin {
+  color: green;
+}
+.error_container--info {
+  border-left: 4px solid blue;
+  color: blue;
+}
+.error_container--info .col--2 #cancelLogin {
+  color: blue;
+}
+.error_container__icon {
+  font-size: 3rem;
+}
+.error_container__icon .fa-times {
+  font-size: 2rem;
+  color: #525659;
+}
+.error_container__title {
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+}
+.error_container #cancelLogin {
+  color: red;
+  text-align: center;
+  font-family: "Nexa Bold";
+  font-size: 1rem;
+}
+
 .login-body {
   background-color: #9cbfda;
   position: relative;
@@ -1766,17 +2393,43 @@ html, body {
 }
 
 .form_container {
+  position: relative;
+  overflow: hidden;
   width: 90%;
-  height: 35rem;
+  height: 40rem;
   background-color: white;
   margin: auto;
   margin: 3rem auto;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 1.5fr 5fr 1fr;
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 1.5rem rgba(42, 45, 62, 0.3);
+}
+.form_container--otp {
+  height: 34rem;
+  position: sticky;
+}
+.form_container--otp .form_container__form__input_field input[name=otp] {
+  background-color: transparent;
+  border: none;
+  letter-spacing: 8rem;
+  font-size: 4rem;
+  width: 100%;
+  padding-left: 15px;
+  letter-spacing: 8rem;
+  border: 0;
+  background-image: linear-gradient(to left, #0173b2 70%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 118px 2px;
+  background-repeat: repeat-x;
+  background-position-x: 80px;
+}
+.form_container--phone {
+  height: 35rem;
+}
+.form_container--get_a_quote {
+  height: 77rem;
 }
 @media (min-width: 768px) {
   .form_container {
@@ -1801,19 +2454,73 @@ html, body {
   padding: 2rem 2rem;
   display: grid;
   grid-template-columns: 100%;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
+}
+.form_container__form .otp-message {
+  text-align: center;
+}
+.form_container__form .try_another_method {
+  text-align: center;
+}
+.form_container__form .try_another_method--email {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form_container__form .try_another_method a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #0173b2;
+}
+.form_container__form .try_another_method a span {
+  font-family: "Nexa Bold";
+}
+.form_container__form .try_another_method span {
+  cursor: pointer;
+  text-decoration: none;
+  color: #0173b2;
+}
+.form_container__form .try_another_method span span {
+  font-family: "Nexa Bold";
 }
 .form_container__form__input_field {
+  text-align: left;
   position: relative;
+  display: flex;
+  flex-direction: row;
+  grid-gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+.form_container__form__input_field--add-doctors {
+  flex-direction: column;
+}
+.form_container__form__input_field--city-state {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.form_container__form__input_field--city-state input {
+  width: 100%;
 }
 .form_container__form__input_field i {
   position: absolute;
   right: 5%;
-  color: #ccc;
+  color: #0173b2;
   top: 30%;
   font-size: 2rem;
 }
-.form_container__form input[type=text] {
+.form_container__form__input_field label {
+  font-size: 1.3rem;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+.form_container__form__input_field .tagify {
+  font-size: 1.4rem;
+  font-family: "Nexa Bold";
+  color: #777;
+}
+.form_container__form input[type=text], .form_container__form input[type=time], .form_container__form .form_container__form__phone_number {
+  -moz-appearance: textfield;
   width: 100%;
   height: 100%;
   border-radius: 0;
@@ -1822,12 +2529,20 @@ html, body {
   border-color: #ccc;
   padding: 1rem 2rem;
   font-family: "Nexa Bold";
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #777;
+}
+.form_container__form input[type=text]::-webkit-inner-spin-button, .form_container__form input[type=text]::-webkit-outer-spin-button, .form_container__form input[type=time]::-webkit-inner-spin-button, .form_container__form input[type=time]::-webkit-outer-spin-button, .form_container__form .form_container__form__phone_number::-webkit-inner-spin-button, .form_container__form .form_container__form__phone_number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.form_container__form input[type=text]:focus, .form_container__form input[type=time]:focus, .form_container__form .form_container__form__phone_number:focus {
+  outline: 1px solid #0173b2;
 }
 .form_container__form__submit {
   border: none;
-  padding: 1rem 0rem;
+  padding: 2rem 0rem;
   border-radius: 0;
   background-color: #2a2d3e;
   color: white;
@@ -1853,6 +2568,23 @@ html, body {
   color: #0173b2;
   cursor: pointer;
 }
+.form_container--add-doctors {
+  height: 178rem;
+  width: 90%;
+}
+@media (min-width: 768px) {
+  .form_container--add-doctors {
+    width: 70%;
+  }
+}
+@media (min-width: 1024px) {
+  .form_container--add-doctors {
+    width: 50%;
+  }
+}
+.form_container--add-hospitals {
+  height: 100rem;
+}
 
 .copyright {
   text-align: center;
@@ -1875,10 +2607,10 @@ html, body {
 }
 
 .form_container--signup {
-  height: 67rem;
+  height: 75rem;
   grid-template-rows: 1fr 5fr 0.5fr;
 }
-.form_container__form__input_field select, .form_container__form__input_field input[type=date], .form_container__form__input_field input[type=email], .form_container__form__input_field input[type=password] {
+.form_container__form__input_field select, .form_container__form__input_field input[type=date], .form_container__form__input_field input[type=email], .form_container__form__input_field input[type=password], .form_container__form__input_field input[type=tel] {
   border-style: solid;
   background-color: white;
   width: 100%;
@@ -1886,23 +2618,14 @@ html, body {
   color: #777;
   padding: 1rem 1.5rem;
   font-family: "Nexa Bold";
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
-.form_container__form #city {
-  width: 49%;
+.form_container__form__input_field select:focus, .form_container__form__input_field input[type=date]:focus, .form_container__form__input_field input[type=email]:focus, .form_container__form__input_field input[type=password]:focus, .form_container__form__input_field input[type=tel]:focus {
+  outline: 1px solid #0173b2;
 }
-@media (min-width: 768px) {
-  .form_container__form #city {
-    width: 49%;
-  }
-}
-.form_container__form #state {
-  width: 49%;
-}
-@media (min-width: 768px) {
-  .form_container__form #state {
-    width: 49%;
-  }
+.form_container__form #isDoctorInput {
+  flex-direction: row;
+  align-items: center;
 }
 
 .page_description {
@@ -2118,14 +2841,22 @@ html, body {
 .more_services__container__row--2__carousel__item__container--1 {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--008.jpg");
   background-size: cover;
+  order: 1;
 }
 .more_services__container__row--2__carousel__item__container--2 {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--010.jpg");
   background-size: cover;
+  order: 2;
 }
 .more_services__container__row--2__carousel__item__container--3 {
   background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--011.jpg");
   background-size: cover;
+  order: 3;
+}
+.more_services__container__row--2__carousel__item__container--4 {
+  background-image: url("https://s3.ap-south-1.amazonaws.com/appdev.konfinity.com/css/tasks/image--011.jpg");
+  background-size: cover;
+  order: 4;
 }
 .more_services__container__row--2__carousel__item__container__item {
   background-color: white;
@@ -2208,7 +2939,9 @@ html, body {
     justify-self: end;
   }
   .more_services__container__row--2__carousel {
-    grid-template-columns: 1fr 1fr 1fr;
+    overflow: hidden;
+    grid-template-columns: repeat(2, minmax(calc(33.33% - 1rem), auto)) 33.33%;
+    grid-auto-flow: column;
   }
   .more_services__container__row--2__carousel__item__container__item {
     top: 70.5%;
@@ -2324,7 +3057,7 @@ html, body {
   background-color: white;
   color: #777;
   padding: 0rem 1.5rem;
-  font-family: "Nexa Bold";
+  font-family: "Nexa Light";
   font-size: 1.2rem;
   line-height: 3rem;
 }
@@ -2332,6 +3065,11 @@ html, body {
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 1rem;
+}
+.contact_us_form__container__form--1__textarea textarea {
+  width: 100%;
+  font-family: "Nexa Light";
+  font-size: 1.2rem;
 }
 .contact_us_form__container__form--2 {
   justify-self: end;
@@ -2646,59 +3384,237 @@ html, body {
     transform: scale(2.7);
   }
 }
-.form_container--book {
-  height: 70rem;
-  grid-template-rows: 1.5fr 11fr;
+.appointment-page {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  margin: 2rem auto;
+  flex-direction: column;
+  grid-gap: 1rem;
 }
-.form_container__form {
+.appointment-page .appointment__col--1 {
+  width: 100%;
+  display: flex;
+}
+.appointment-page .appointment__col--1 .appointment_details {
+  width: 100%;
+  height: 23rem;
+  background-color: white;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_type {
+  font-size: 2rem;
+  font-family: "Nexa Bold";
+  padding: 2rem;
+  border-bottom: 1px solid #ccc;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  grid-gap: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time .appointment_date {
+  width: 50%;
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: #2a2d3e;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time .appointment_date span:first-of-type {
+  font-family: "Nexa Light";
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time .appointment_time {
+  width: 50%;
+  text-align: right;
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: #2a2d3e;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time .appointment_time span:first-of-type {
+  font-family: "Nexa Light";
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_date_and_time .appointment_change_schedule {
+  font-size: 1.4rem;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_schedule .appointment_change_schedule a {
+  text-decoration: none;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
   grid-gap: 2rem;
 }
-.form_container__form__input_field--book {
-  display: grid;
-  grid-gap: 1rem;
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_display_picture_container {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
-.form_container__form__input_field--book span {
-  font-size: 1.5rem;
-  font-family: "Nexa Bold";
-}
-.form_container__form__input_field__container {
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_display_picture_container img {
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 10fr;
+  width: 100%;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_info {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_info .doctor_name {
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: #2a2d3e;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_info .doctor_qualifications {
+  font-family: "Nexa Bold";
+  font-size: 1rem;
+  color: #0173b2;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_doctor_details__info_card .doctor_info .doctor_specializations {
+  font-family: "Nexa Bold";
+  font-size: 1rem;
+  color: #0173b2;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+  grid-gap: 2rem;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_display_picture_container {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_display_picture_container img {
+  height: 100%;
+  width: 100%;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_info {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_info .hospital_name {
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: #2a2d3e;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_info .hospital_address {
+  font-family: "Nexa Bold";
+  font-size: 1rem;
+  color: #0173b2;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_info .hospital_get_directions {
+  font-family: "Nexa Bold";
+  font-size: 1rem;
+  color: #0173b2;
+}
+.appointment-page .appointment__col--1 .appointment_details .appointment_hospital_details__info_card .hospital_info .hospital_get_directions a {
+  text-decoration: underline;
+  color: #0173b2;
+  cursor: pointer;
+}
+.appointment-page .appointment__col--2 {
+  width: 100%;
+  background-color: white;
+}
+.appointment-page .appointment__col--2 .appointment_form_title {
+  padding: 2rem;
+  font-family: "Nexa Bold";
+  font-size: 2rem;
+  border-bottom: 1px solid #ccc;
+}
+.appointment-page .appointment__col--2 .appointment_form_title--booked i {
+  color: green;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient {
+  padding: 2rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient form {
+  display: flex;
+  flex-direction: column;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient_title {
+  font-family: "Nexa Bold";
+  font-size: 1.3rem;
+  padding: 0.5rem 0rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient_select {
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0rem 2rem 0rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient_select_item {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
-.form_container__form__input_field__container label {
-  font-size: 1.3rem;
-  font-family: "Nexa Light";
-  line-height: 1.7rem;
-}
-.form_container__form__input_field__container input {
+.appointment-page .appointment__col--2 .appointment_form_patient_select_item span {
   font-family: "Nexa Bold";
-}
-.form_container__form__input_field__container input[type=radio] {
-  margin: 0;
-}
-.form_container__form__input_field__container--date {
-  display: grid;
-  grid-column: 1/-1;
-  grid-template-columns: 100%;
-  grid-gap: 1rem;
-}
-.form_container__form__input_field label[for=health_record], .form_container__form__input_field label[for=appointment_date], .form_container__form__input_field label[for=appointment_details] {
-  font-size: 1.5rem;
-  font-family: "Nexa Bold";
-}
-.form_container__form__submit span {
   font-size: 1.3rem;
-  line-height: 3rem;
+  color: #0173b2;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient_select_item:first-of-type {
+  border-bottom: 1px solid #ccc;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .current_user_form, .appointment-page .appointment__col--2 .appointment_form_patient .someone_else_form {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 2rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .current_user_form .appointment_form_input_field, .appointment-page .appointment__col--2 .appointment_form_patient .someone_else_form .appointment_form_input_field {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .current_user_form .appointment_form_input_field input, .appointment-page .appointment__col--2 .appointment_form_patient .someone_else_form .appointment_form_input_field input {
+  border: 1px solid #ccc;
+  padding: 1rem 2rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .current_user_form .appointment_form_input_field input[type=number], .appointment-page .appointment__col--2 .appointment_form_patient .someone_else_form .appointment_form_input_field input[type=number] {
+  -moz-appearance: textfield;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .current_user_form .appointment_form_input_field label, .appointment-page .appointment__col--2 .appointment_form_patient .someone_else_form .appointment_form_input_field label {
+  font-size: 1.3rem;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .appointment_form_button {
+  margin-top: 1rem;
+}
+.appointment-page .appointment__col--2 .appointment_form_patient .appointment_form_button button {
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: #0173b2;
+  font-family: "Nexa Bold";
+  padding: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .form_container__form__input_field__container--date {
-    display: grid;
-    grid-column: 1/-1;
-    grid-template-columns: 100%;
-    grid-gap: 1rem;
+  .appointment-page {
+    flex-direction: row;
+  }
+  .appointment-page .appointment__col--1 .appointment_details {
+    width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .appointment-page {
+    width: 65%;
+  }
+  .appointment-page .appointment__col--1 .appointment_details {
+    width: 100%;
     height: 100%;
   }
 }
@@ -2748,9 +3664,6 @@ html, body {
 .about_doctor__container__col--1__more_details__accordian__item > * {
   pointer-events: none;
 }
-.about_doctor__container__col--1__more_details__accordian__item:first-of-type .about_doctor__container__col--1__more_details__accordian__item__btn {
-  border-top: 1px dashed #ccc;
-}
 .about_doctor__container__col--1__more_details__accordian__item .expandCollapse {
   max-height: 20rem;
   padding: 1rem;
@@ -2760,7 +3673,6 @@ html, body {
 }
 .about_doctor__container__col--1__more_details__accordian__item__btn {
   padding: 1rem 0rem;
-  border-bottom: 1px dashed #ccc;
   text-decoration: none;
   color: #0173b2;
   font-family: "Nexa Bold";
@@ -2791,6 +3703,14 @@ html, body {
   max-height: 0;
   transition: max-height 0.3s;
   overflow: hidden;
+}
+.about_doctor__container__col--1__more_details__accordian__item__content__para .detail-tag {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid #0173b2;
+  font-family: "Nexa Bold";
+  margin: 0rem 0.5rem;
 }
 .about_doctor__container__col--2 {
   order: 1;
@@ -2901,11 +3821,9 @@ html, body {
     padding: 2rem 10rem;
   }
 }
-.hero {
-  height: 40rem;
-}
 .hero--plus {
-  background-image: url("./../../../assets/tvastraPlus_heroSection.png");
+  height: 40rem;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 10%), url("./../../../assets/tvastraPlus_heroSection.png");
 }
 .hero--plus .plus {
   padding: 1rem;
@@ -2938,12 +3856,12 @@ html, body {
 }
 
 .pricing__container {
-  height: 114rem;
+  height: 130rem;
   position: relative;
   background-image: linear-gradient(to bottom, rgba(1, 115, 178, 0.4), rgba(1, 115, 178, 0) 70%);
 }
 .pricing .pricing__card {
-  top: -16%;
+  top: -13%;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -2954,9 +3872,9 @@ html, body {
   box-shadow: 0rem 0rem 2rem rgba(0, 0, 0, 0.2);
   display: grid;
   grid-template-columns: 100%;
+  grid-gap: 2rem;
 }
 .pricing__heading__div {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem 0rem;
   display: grid;
   grid-template-columns: 100%;
@@ -2971,11 +3889,32 @@ html, body {
   text-align: center;
 }
 .pricing__table {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 100%;
-  grid-gap: 5rem;
+  grid-gap: 4rem;
+}
+.pricing__table .plan-advanced {
+  position: relative;
+  padding: 0rem 5rem;
+  background-image: linear-gradient(to bottom, rgba(1, 115, 178, 0.3), rgba(1, 115, 178, 0));
+}
+.pricing__table .plan-advanced::before {
+  content: "Popular";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  font-size: 1.2rem;
+  text-align: center;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  font-family: "Nexa Bold";
+  color: white;
+  background-color: green;
+  border-radius: 1rem;
 }
 .pricing__table__basic_plan {
+  padding: 0rem 5rem;
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 2rem;
@@ -3061,10 +4000,10 @@ html, body {
   text-align: center;
 }
 .trust__rating {
-  display: grid;
-  grid-template-columns: 100%;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 }
 .trust__rating__count {
   display: grid;
@@ -3073,14 +4012,16 @@ html, body {
 }
 .trust__rating__count__figure {
   font-family: "Nexa Bold";
-  color: #2a2d3e;
+  color: #0173b2;
   text-align: center;
+  font-size: 4rem;
 }
 .trust__rating__count__desc {
   text-align: center;
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 1rem;
+  color: #0173b2;
 }
 .trust__rating__bars {
   display: grid;
@@ -3102,6 +4043,7 @@ html, body {
   font-family: "Nexa Bold";
   justify-self: center;
   align-self: center;
+  color: #0173b2;
 }
 .trust__rating__bars__list__bar__container {
   width: 100%;
@@ -3113,7 +4055,7 @@ html, body {
 }
 .trust__rating__bars__list__bar__container__bar {
   height: 100%;
-  background-color: #2a2d3e;
+  background-color: #0173b2;
   border-radius: 1rem;
 }
 .trust__rating__bars__list__bar__container__bar--1 {
@@ -3144,17 +4086,19 @@ html, body {
   grid-gap: 1rem;
 }
 .trust__statistics__stat__icon {
-  font-size: 4rem;
-  color: #2a2d3e;
+  font-size: 3rem;
+  color: #0173b2;
   text-align: center;
 }
 .trust__statistics__stat__heading {
   font-family: "Nexa Bold";
   text-align: center;
+  color: #0173b2;
 }
 .trust__statistics__stat__desc {
   font-family: "Nexa Light";
   text-align: center;
+  color: #0173b2;
 }
 
 .benefits__container {
@@ -3165,6 +4109,7 @@ html, body {
   text-align: center;
   font-family: "Nexa Light";
   position: relative;
+  padding: 1.5rem 0rem;
 }
 .benefits__heading::after {
   content: "";
@@ -3187,17 +4132,13 @@ html, body {
   grid-template-columns: 100%;
   grid-gap: 2rem;
 }
-.benefits__grid .col {
-  display: grid;
-  grid-template-columns: 100%;
-  grid-gap: 1rem;
-}
 .benefits__grid .col .col-heading {
   font-family: "Nexa Bold";
   color: #2a2d3e;
   text-align: center;
 }
 .benefits__grid .col .col-points {
+  margin-top: 3rem;
   display: grid;
   grid-template-columns: 100%;
   grid-gap: 1.5rem;
@@ -3296,7 +4237,7 @@ html, body {
   background-color: white;
 }
 .benefits__grid__col--2 .more_hospitals span {
-  font-family: "Nexa Bold";
+  font-family: "Nexa Light";
 }
 
 .tests__container {
@@ -3311,15 +4252,20 @@ html, body {
 }
 .tests__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, calc(50% - .5rem));
   grid-gap: 1rem;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem;
 }
 .tests__grid__card {
+  width: 100%;
   background-color: white;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   padding: 2rem;
   display: grid;
-  grid-template-columns: 100%;
   grid-gap: 1rem;
   align-items: center;
   justify-items: center;
@@ -3356,23 +4302,29 @@ html, body {
   grid-template-columns: 100%;
   grid-gap: 2rem;
 }
-.testimonials__heading {
-  font-family: "Nexa Bold";
-  text-align: center;
-  color: #2a2d3e;
+.testimonials_heading_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 }
-.testimonials__heading span {
+.testimonials_heading_container span {
+  margin-left: 1rem;
   justify-self: center;
   align-self: center;
   background-color: #0173b2;
   color: white;
   font-family: "Nexa Bold";
   font-size: 1.2rem;
-  width: 16%;
   letter-spacing: 0.1rem;
   border-radius: 0.5rem;
   display: block;
-  margin: auto;
+  padding: 1rem;
+}
+.testimonials__heading {
+  font-family: "Nexa Bold";
+  text-align: center;
+  color: #2a2d3e;
 }
 .testimonials__grid {
   display: grid;
@@ -3383,8 +4335,9 @@ html, body {
   background-color: white;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  display: grid;
-  grid-gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .testimonials__grid__card__testimonial {
   font-family: "Nexa Bold";
@@ -3413,7 +4366,7 @@ html, body {
   font-family: "Nexa Bold";
   background-color: rgba(1, 115, 178, 0.2);
   color: #0173b2;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
 }
 
@@ -3443,32 +4396,50 @@ html, body {
   }
 
   .pricing__container {
-    height: 47rem;
+    height: 66rem;
   }
   .pricing__container .pricing__card {
     width: 91.5%;
     grid-template-columns: 1fr 1fr 1fr;
-    top: -34%;
+    top: -25%;
   }
   .pricing__container .pricing__table {
+    grid-gap: 0;
     grid-column: 1/-1;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .pricing__container .pricing__table__basic_plan {
+    border-right: 1px solid rgba(1, 115, 178, 0.4);
+  }
+  .pricing__container .pricing__table__basic_plan:last-of-type {
+    border: none;
   }
   .pricing__heading__div {
     grid-column: 1/-1;
   }
 
+  .trust__para {
+    max-width: 65rem;
+  }
   .trust__container {
     grid-gap: 4rem;
+    justify-items: center;
   }
   .trust__rating {
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
     grid-gap: 0;
-    align-self: center;
   }
   .trust__rating__count {
     max-height: 10rem;
     align-self: center;
+  }
+  .trust__rating__count__figure {
+    font-size: 5rem;
+  }
+  .trust__rating__bars {
+    width: 35rem;
   }
   .trust__statistics {
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -3481,7 +4452,7 @@ html, body {
     width: 40%;
   }
   .benefits__grid {
-    grid-gap: 5rem;
+    grid-gap: 6rem;
   }
   .benefits__grid__col--2 {
     max-height: 28rem;
@@ -3515,10 +4486,9 @@ html, body {
   .tests__heading {
     text-align: left;
   }
-  .tests__grid {
-    grid-template-columns: 1fr 1fr;
+  .testimonials__container .testimonials_heading_container {
+    justify-content: flex-start;
   }
-
   .testimonials__heading {
     text-align: left;
   }
@@ -3527,7 +4497,7 @@ html, body {
     display: inline;
   }
   .testimonials__grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .testimonials__grid__card__user_info {
     max-height: 12rem;
@@ -3538,18 +4508,27 @@ html, body {
   }
 }
 @media (min-width: 1024px) {
+  .hero .container--flex {
+    justify-content: center;
+  }
+
   .pricing__container {
-    height: 47rem;
+    height: 60rem;
   }
   .pricing__container .pricing__card {
     width: 85%;
+    top: -15%;
     padding: 4rem 4rem 6rem 4rem;
   }
   .pricing__heading__div__heading {
-    text-align: left;
+    text-align: center;
   }
   .pricing__heading__div span {
-    text-align: left;
+    text-align: center;
+  }
+
+  .trust__rating__bars {
+    width: 45rem;
   }
 
   .benefits__heading::after {
@@ -3557,29 +4536,1412 @@ html, body {
   }
   .benefits__grid {
     grid-template-columns: 100%;
+    grid-gap: 8rem;
   }
   .benefits__grid .row {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 4rem;
+    grid-gap: 10rem;
   }
   .benefits__grid .row--1 .benefits__grid__col--1 {
-    max-height: 20rem;
+    max-height: 25rem;
   }
   .benefits__grid__col--2 {
     grid-column: span 1;
   }
   .benefits__grid__col--1 {
     grid-column: span 2;
+    grid-template-rows: 1fr 2fr;
+    max-width: 60rem;
+    max-height: 25rem;
   }
   .benefits__grid .col .col-points .point {
     grid-template-columns: 1fr 20fr;
   }
 
   .tests__grid {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, minmax(calc(25% - .75rem), auto));
+    grid-auto-flow: column;
+    grid-template-rows: 100%;
+    overflow: hidden;
   }
   .tests__grid__card {
     justify-items: start;
     align-items: start;
   }
+
+  .testimonials__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
+.otpField {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin-right: 25px;
+  text-align: center;
+  border: none;
+  font-family: "Nexa Bold";
+  font-size: 2rem;
+  border-bottom: 2px solid #0173b2;
+  -moz-appearance: textfield;
+}
+.otpField:last-child {
+  margin-right: 0;
+}
+.otpField::-webkit-inner-spin-button, .otpField::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.otpField:focus, .otpField.focus {
+  border-color: #0173b2;
+  outline: none;
+  box-shadow: none;
+}
+
+.background-dashboard {
+  padding: 3rem;
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: 1fr;
+  height: calc(100% - 10rem);
+  flex-wrap: wrap;
+}
+.background-dashboard .edit_profile_heading--edit_profile {
+  grid-column: 1/-1;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: white;
+}
+.background-dashboard .edit_profile_heading--edit_profile h4 {
+  font-family: "Nexa Bold";
+}
+.background-dashboard .edit_profile_heading--edit_profile .save_button {
+  text-align: right;
+}
+.background-dashboard .edit_profile_heading--edit_profile .save_button button {
+  background-color: #0173b2;
+  padding: 1rem 2rem;
+  border: none;
+}
+.background-dashboard .edit_profile_heading--edit_profile .save_button button span {
+  font-family: "Nexa Bold";
+  color: white;
+}
+
+.admin_sidebar {
+  background-color: white;
+  width: 20rem;
+  left: 0;
+  top: 10rem;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.admin_sidebar .cross-sidebar {
+  position: absolute;
+  right: 1rem;
+  transform: translateY(1rem);
+  font-size: 1.5rem;
+  color: grey;
+}
+.admin_sidebar .logo_container {
+  margin-bottom: 5rem;
+}
+.admin_sidebar .logo_container img {
+  width: 15rem;
+  height: auto;
+}
+.admin_sidebar .menu_container {
+  display: flex;
+  flex-direction: column;
+}
+.admin_sidebar .menu_container .menu-title {
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+  padding: 2.5rem 2rem;
+}
+.admin_sidebar .menu_container .menu-item {
+  display: flex;
+  flex-direction: row;
+  grid-column-gap: 1rem;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 1rem 2rem;
+}
+.admin_sidebar .menu_container .menu-item a {
+  text-decoration: none;
+  color: grey;
+  font-size: 1.5rem;
+  font-family: "Nexa Bold";
+}
+.admin_sidebar .menu_container .menu-item i {
+  font-size: 1.5rem;
+  color: grey;
+}
+.admin_sidebar .menu_container .menu-item i::before {
+  position: relative;
+  top: 25%;
+  transform: translateY(-50%);
+}
+.admin_sidebar .menu_container .menu-item:hover {
+  border-left: 2px solid #0173b2;
+}
+.admin_sidebar .menu_container .menu-item:hover a {
+  color: #0173b2;
+}
+.admin_sidebar .menu_container .menu-item:hover i {
+  color: #0173b2;
+}
+.admin_sidebar .menu_container .menu-item--active {
+  border-left: 2px solid #0173b2;
+}
+.admin_sidebar .menu_container .menu-item--active p a {
+  color: #0173b2;
+}
+.admin_sidebar .menu_container .menu-item--active i.fas {
+  color: #0173b2;
+}
+
+@media (min-width: 768px) {
+  .admin_sidebar {
+    width: 100%;
+    display: none;
+  }
+
+  .background-dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .admin_sidebar {
+    width: 100%;
+    border-right: 1px solid #ddd;
+    display: block;
+  }
+
+  .background-dashboard {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+.admin_header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.admin_header .menu-burger {
+  flex-grow: 1;
+}
+.admin_header .menu-burger i {
+  font-size: 2rem;
+}
+.admin_header .bell-icon {
+  margin-right: 2rem;
+}
+.admin_header .bell-icon i {
+  position: relative;
+  font-size: 3rem;
+}
+.admin_header .bell-icon i::before {
+  transform: rotate(45deg);
+}
+.admin_header .bell-icon i::after {
+  content: "5";
+  font-size: 1rem;
+  text-align: center;
+  color: black;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid white;
+  background-color: red;
+  border-radius: 50%;
+  right: 0;
+}
+.admin_header .display-picture {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.admin_header .display-picture img {
+  height: 100%;
+  width: 100%;
+}
+.admin_header .display-picture i {
+  font-size: 2rem;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .admin_header {
+    padding: 2rem 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .admin_header {
+    width: calc(100% - 30rem);
+    right: 0;
+  }
+}
+.profile_detail {
+  display: none;
+}
+
+.profile_dashboard__sidebar_menu_container {
+  display: none;
+}
+
+.page-title {
+  padding: 2rem;
+}
+.page-title span {
+  font-size: 1.5rem;
+  font-family: "Nexa Bold";
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    display: none;
+  }
+
+  .profile_detail {
+    display: block;
+    background-color: white;
+    height: 7rem;
+    padding: 1rem;
+    margin: 3rem 3rem 0rem 3rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .profile_detail .profile_small_details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 20rem;
+  }
+  .profile_detail .profile_small_details .profile_picture__container {
+    width: 5rem;
+    height: 5rem;
+    align-self: center;
+    justify-self: start;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .profile_detail .profile_small_details .profile_picture__container img {
+    width: 100%;
+    height: 100%;
+  }
+  .profile_detail .profile_small_details .name_and_phone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .profile_detail .profile_small_details .name_and_phone a {
+    text-decoration: none;
+    font-family: "Nexa Bold";
+    color: #525659;
+  }
+  .profile_detail .profile_small_details .name_and_phone .name {
+    margin-bottom: 1rem;
+  }
+  .profile_detail .profile_small_details .name_and_phone .phoneNumber {
+    font-family: "Nexa Light";
+  }
+
+  .profile_dashboard__sidebar_menu_container {
+    background-color: white;
+    display: block;
+    width: 20rem;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    margin: 0rem 0rem 0rem 3rem;
+  }
+  .profile_dashboard__sidebar_menu_container .profile_dashboard__sidebar_menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile_dashboard__sidebar_menu_container .profile_dashboard__sidebar_menu a {
+    text-decoration: none;
+  }
+  .profile_dashboard__sidebar_menu_container .profile_dashboard__sidebar_menu__item {
+    font-family: "Nexa Bold";
+    color: #525659;
+    font-size: 1.4rem;
+    padding: 2rem 2rem;
+  }
+  .profile_dashboard__sidebar_menu_container .profile_dashboard__sidebar_menu__item:hover {
+    background-color: rgba(0, 0, 0, 0.01);
+    border-left: 2px solid #0173b2;
+  }
+  .profile_dashboard__sidebar_menu_container .profile_dashboard__sidebar_menu .active {
+    background-color: #0173b2;
+    color: white;
+  }
+}
+@media (min-width: 1024px) {
+  .profile_detail {
+    margin: 3rem 10rem 0rem 10rem;
+  }
+
+  .profile_dashboard__sidebar_menu_container {
+    margin: 0rem 0rem 0rem 10rem;
+  }
+}
+.dashboard_content {
+  transform: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.statistics_site__grid {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 2rem;
+}
+.statistics_site__grid__item {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-gap: 3rem;
+  box-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  padding: 2rem 2rem;
+}
+.statistics_site__grid__item__col--1 {
+  align-self: center;
+}
+.statistics_site__grid__item__col--2 {
+  align-self: center;
+}
+.statistics_site__grid__item__icon {
+  font-size: 3rem;
+  color: #0173b2;
+}
+.statistics_site__grid__item__title {
+  font-family: "Nexa Bold";
+  color: black;
+  margin-bottom: 0.5rem;
+}
+.statistics_site__grid__item__figure {
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+
+@media (min-width: 768px) {
+  .statistics_site {
+    padding: 2rem 3rem;
+  }
+  .statistics_site__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .dashboard_content {
+    overflow: scroll;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .statistics_site__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.add_doctors {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  height: 5rem;
+  width: 5rem;
+  background-color: black;
+  z-index: 1000;
+  border: none;
+  border-radius: 50%;
+}
+.add_doctors i {
+  color: white;
+}
+
+.add-doctors {
+  background-color: #9cbfda;
+}
+
+.admin_doctors {
+  padding: 2rem 2rem;
+}
+.admin_doctors__title {
+  font-family: "Nexa Bold";
+  margin-bottom: 2rem;
+}
+.admin_doctors__grid {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-gap: 2rem;
+}
+.admin_doctors__grid__item {
+  width: 100%;
+  height: 60rem;
+}
+.admin_doctors__grid__item__image_container {
+  width: 100%;
+  height: 50%;
+}
+.admin_doctors__grid__item__image_container__image {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .admin_doctors {
+    padding: 2rem 3rem;
+  }
+}
+.page-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal #close_show_report {
+  font-size: 5rem;
+  font-family: "Nexa Bold";
+  color: white;
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 1rem;
+}
+
+.page-content {
+  height: 100%;
+}
+.page-content .page-content-container {
+  width: 100%;
+  padding: 2rem;
+  height: 100%;
+}
+.page-content .page-content-container .appointment_heading {
+  font-family: "Nexa Bold";
+  color: black;
+}
+.page-content .page-content-container .appointment_container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+.page-content .page-content-container .appointment_container .no_appointments_container {
+  position: relative;
+  height: 100%;
+}
+.page-content .page-content-container .appointment_container .no_appointments_container .no_appointments {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  grid-gap: 2rem;
+  transform: translate(-50%, -50%);
+}
+.page-content .page-content-container .appointment_container .no_appointments_container .no_appointments i {
+  text-align: center;
+  font-size: 5rem;
+  color: #0173b2;
+}
+.page-content .page-content-container .appointment_container .no_appointments_container .no_appointments h4 {
+  color: #0173b2;
+  font-family: "Nexa Bold";
+}
+.page-content .page-content-container .appointment_container .appointment {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 1rem;
+  background-color: #eee;
+  border: 1px solid #eee;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0rem;
+  flex-wrap: wrap;
+}
+.page-content .page-content-container .appointment_container .appointment_date {
+  background-color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  width: 6.9rem;
+  align-items: center;
+  justify-content: center;
+}
+.page-content .page-content-container .appointment_container .appointment_date_date {
+  font-family: "Nexa Bold";
+  color: black;
+  font-size: 2rem;
+}
+.page-content .page-content-container .appointment_container .appointment_date_month {
+  text-transform: uppercase;
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+  color: black;
+}
+.page-content .page-content-container .appointment_container .appointment_details {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  flex-grow: 2;
+  justify-content: center;
+}
+.page-content .page-content-container .appointment_container .appointment_details_doctor_name {
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: black;
+}
+.page-content .page-content-container .appointment_container .appointment_details_time {
+  font-family: "Nexa Bold";
+  color: black;
+}
+.page-content .page-content-container .appointment_container .appointment_details_clinic {
+  font-family: "Nexa Bold";
+  color: black;
+}
+.page-content .page-content-container .appointment_container .appointment_details_status .approved {
+  line-height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-family: "Nexa Bold";
+  background-color: rgba(0, 128, 0, 0.2);
+  color: green;
+}
+.page-content .page-content-container .appointment_container .appointment_details_status .cancelled {
+  line-height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-family: "Nexa Bold";
+  background-color: rgba(255, 0, 0, 0.2);
+  color: red;
+}
+.page-content .page-content-container .appointment_container .appointment_view_details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.page-content .page-content-container .appointment_container .appointment_view_details_btn {
+  background-color: #0173b2;
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  color: white;
+  font-family: "Nexa Bold";
+  padding: 1rem;
+}
+
+.record_container_view {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.record_container {
+  position: relative;
+  height: 100%;
+  padding: 1rem 2rem;
+  grid-gap: 1rem;
+}
+.record_container .record_view {
+  width: 30rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #0173b2;
+}
+.record_container .record_view .record_title {
+  padding: 1rem;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  border-bottom: 1px solid #0173b2;
+  font-family: "Nexa Bold";
+}
+.record_container .record_view .record_title ul {
+  position: absolute;
+  right: 0;
+  top: 3rem;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid black;
+  z-index: 100;
+}
+.record_container .record_view .record_image {
+  width: 100%;
+  height: calc(100% - 3.5rem);
+}
+.record_container .record_view .record_image img {
+  height: 100%;
+  width: auto;
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.record_container .no_appointments_container {
+  position: relative;
+  height: 100%;
+}
+.record_container .no_appointments_container .no_appointments {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  grid-gap: 2rem;
+  transform: translate(-50%, -50%);
+}
+.record_container .no_appointments_container .no_appointments i {
+  text-align: center;
+  font-size: 5rem;
+  color: #0173b2;
+}
+.record_container .no_appointments_container .no_appointments h4 {
+  color: #0173b2;
+  font-family: "Nexa Bold";
+}
+.record_container .appointment {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 1rem;
+  background-color: #eee;
+  border: 1px solid #eee;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0rem;
+  flex-wrap: wrap;
+}
+.record_container .appointment_date {
+  background-color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  width: 6.9rem;
+  align-items: center;
+  justify-content: center;
+}
+.record_container .appointment_date_date {
+  font-family: "Nexa Bold";
+  color: black;
+  font-size: 2rem;
+}
+.record_container .appointment_date_month {
+  text-transform: uppercase;
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+  color: black;
+}
+.record_container .appointment_details {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+  flex-grow: 2;
+  justify-content: center;
+}
+.record_container .appointment_details_doctor_name {
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+  color: black;
+}
+.record_container .appointment_details_time {
+  font-family: "Nexa Bold";
+  color: black;
+}
+.record_container .appointment_details_clinic {
+  font-family: "Nexa Bold";
+  color: black;
+}
+.record_container .appointment_details_status .approved {
+  line-height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-family: "Nexa Bold";
+  background-color: rgba(0, 128, 0, 0.2);
+  color: green;
+}
+.record_container .appointment_details_status .cancelled {
+  line-height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-family: "Nexa Bold";
+  background-color: rgba(255, 0, 0, 0.2);
+  color: red;
+}
+.record_container .appointment_view_details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.record_container .appointment_view_details_btn {
+  background-color: #0173b2;
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  color: white;
+  font-family: "Nexa Bold";
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .page-content-container {
+    padding: 2rem 3rem;
+  }
+}
+.edit_profile_container {
+  margin: 2rem;
+  background-color: white;
+}
+.edit_profile_container input {
+  margin: 1rem 0rem;
+  display: block;
+  border: 1px solid #ccc;
+  padding: 1rem 1rem;
+  font-family: "Nexa Bold";
+  font-size: 1.2rem;
+  color: #777;
+  width: 100%;
+}
+.edit_profile_container .edit_profile_heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit_profile_container .edit_profile_heading h4 {
+  font-family: "Nexa Bold";
+}
+.edit_profile_container label {
+  font-family: "Nexa Bold";
+  font-size: 1.3rem;
+}
+.edit_profile_container select {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  color: #777;
+  padding: 1rem 1.5rem;
+  font-family: "Nexa Bold";
+  font-size: 1.2rem;
+  background-color: white;
+}
+.edit_profile_container .save_button {
+  padding: 2rem 0rem;
+  text-align: right;
+}
+.edit_profile_container .save_button button {
+  background-color: #0173b2;
+  padding: 1rem 2rem;
+  border: none;
+}
+.edit_profile_container .save_button button span {
+  font-family: "Nexa Bold";
+  color: white;
+}
+.edit_profile_container .photo_and_name {
+  padding: 2rem;
+  border-bottom: 1px solid #ddd;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo {
+  display: flex;
+  grid-gap: 2rem;
+  margin-bottom: 2rem;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_photo_image_container {
+  width: 8rem;
+  height: 8rem;
+  align-self: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_photo_image_container img {
+  width: 100%;
+  height: 100%;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_image_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_image_container #display_picture {
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_image_container span {
+  font-family: "Nexa Bold";
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 2rem;
+}
+.edit_profile_container .photo_and_name .edit_profile_photo .upload_image_container label {
+  font-size: 1.2rem;
+  color: #0173b2;
+  cursor: pointer;
+}
+.edit_profile_container .edit_other_details {
+  border-bottom: 1px solid #ddd;
+  padding: 2rem;
+}
+.edit_profile_container .edit_other_details .edit_phone_number {
+  display: flex;
+  justify-content: space-between;
+}
+.edit_profile_container .edit_other_details .edit_phone_number #edit_phone_number {
+  font-family: "Nexa Bold";
+  color: #0173b2;
+  cursor: pointer;
+}
+.edit_profile_container .edit_address {
+  padding: 2rem;
+}
+.edit_profile_container .edit_doctor_details {
+  display: flex;
+  grid-gap: 1rem;
+  flex-direction: column;
+  padding: 2rem;
+}
+.edit_profile_container .edit_doctor_details .edit_field {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.edit_profile_container .edit_doctor_details .edit_field input[type=number] {
+  -moz-appearance: textfield;
+}
+.edit_profile_container .edit_doctor_details .edit_field textarea {
+  font-family: "Nexa Bold";
+}
+.edit_profile_container .edit_doctor_details .edit_field .tagify {
+  font-size: 1.4rem;
+  font-family: "Nexa Bold";
+  color: #777;
+}
+
+.change_phone_number_form_container {
+  position: fixed;
+  z-index: 100000;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+}
+.change_phone_number_form_container .change_phone_number {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25rem;
+  width: 30rem;
+  background-color: white;
+}
+.change_phone_number_form_container .change_phone_number .close-form {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.4rem;
+}
+
+@media (min-width: 768px) {
+  .change_phone_number_form_container .change_phone_number {
+    width: 40rem;
+    height: 25rem;
+  }
+
+  .edit_profile_container {
+    margin: 3rem;
+  }
+  .edit_profile_container .edit_profile_heading {
+    height: 7.5rem;
+    padding: 2rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .edit_profile_container .edit_profile_heading h4 {
+    font-family: "Nexa Bold";
+  }
+  .edit_profile .photo_and_name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+  .edit_profile .photo_and_name .edit_profile_photo {
+    flex-direction: row;
+  }
+  .edit_profile .edit_other_details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+  }
+  .edit_profile .edit_other_details .edit_phone_number {
+    display: flex;
+    justify-content: space-between;
+  }
+  .edit_profile .edit_other_details .edit_phone_number #edit_phone_number {
+    font-family: "Nexa Bold";
+    color: #0173b2;
+    cursor: pointer;
+  }
+  .edit_profile .edit_address {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    padding: 2rem;
+  }
+  .edit_profile .edit_doctor_details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+    padding: 2rem;
+  }
+  .edit_profile .edit_doctor_details .edit_field .tagify {
+    font-size: 1.4rem;
+    font-family: "Nexa Bold";
+    color: #777;
+  }
+}
+@media (min-width: 1024px) {
+  .edit_profile_container {
+    margin: 0rem;
+  }
+  .edit_profile_container--admin-edit-doctor {
+    padding: 2rem;
+  }
+  .edit_profile .edit_other_details {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .edit_profile .photo_and_name {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .edit_profile .edit_address {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .edit_profile .edit_doctor_details {
+    padding: 2rem;
+    grid-template-columns: 1fr 1fr;
+  }
+  .edit_profile .edit_doctor_details .edit_field .tagify {
+    font-size: 1.4rem;
+    font-family: "Nexa Bold";
+    color: #777;
+  }
+}
+.upload_dp {
+  width: 100%;
+  font-size: "Nexa Bold";
+}
+
+#doctor_description {
+  font-family: "Nexa Bold";
+}
+
+.upload_display_picture_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  grid-gap: 1rem;
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.schedule_appointment_container {
+  margin: 3rem;
+}
+.schedule_appointment_container .add_appointment_slot {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.schedule_appointment_container .add_appointment_slot .add_slot_and_holiday {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  grid-gap: 2rem;
+  justify-content: space-between;
+}
+.schedule_appointment_container .add_appointment_slot .edit_field {
+  flex-basis: 30%;
+  min-width: 30%;
+  margin: 1rem;
+  height: 100%;
+  width: 100%;
+}
+.schedule_appointment_container .add_appointment_slot .edit_field .holiday {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.schedule_appointment_container .add_appointment_slot .edit_field .tagify {
+  margin-top: 1rem;
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+}
+.schedule_appointment_container .add_appointment_slot .edit_field .add_slot_button {
+  background-color: #0173b2;
+  color: white;
+  border: none;
+  width: 100%;
+  flex-basis: 10rem;
+  min-width: 10rem;
+  padding: 1rem 2rem;
+  font-family: "Nexa Bold";
+}
+
+.scheduled_slots__container {
+  margin: 1.5rem 3rem 3rem 3rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+.scheduled_slots__container h3 {
+  margin-bottom: 1rem;
+  font-family: "Nexa Bold";
+}
+.scheduled_slots__container h4 {
+  font-family: "Nexa Light";
+}
+.scheduled_slots .slot_container {
+  border: 1px solid #0173b2;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+}
+.scheduled_slots .slot_container--disabled {
+  border: 1px solid grey;
+}
+.scheduled_slots .slot_container--disabled div.slot {
+  color: grey;
+}
+.scheduled_slots .slot_container--booked {
+  border: 1px solid green;
+}
+.scheduled_slots .slot_container--booked div.slot {
+  color: green;
+}
+.scheduled_slots__slot {
+  display: flex;
+  flex-direction: row;
+  padding: 1.5rem;
+  background-color: #ddd;
+  justify-content: space-between;
+  grid-gap: 1rem;
+}
+.scheduled_slots__slot--holiday {
+  background-color: #999;
+}
+.scheduled_slots__day {
+  background-color: #eee;
+  padding: 1rem;
+  font-family: "Nexa Bold";
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+}
+.scheduled_slots__hospital_and_time {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.scheduled_slots__hospital {
+  font-size: 1.5rem;
+  font-family: "Nexa Bold";
+}
+.scheduled_slots__time {
+  font-size: 1.1rem;
+  font-family: "Nexa Light";
+}
+.scheduled_slots__edit, .scheduled_slots__detail {
+  background-color: #0173b2;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: "Nexa Bold";
+}
+.scheduled_slots__edit_options {
+  background-color: #eee;
+  padding: 1rem;
+}
+.scheduled_slots__edit_options .holiday {
+  display: flex;
+  align-items: center;
+  grid-gap: 0.5rem;
+}
+.scheduled_slots__edit_options .holiday label {
+  font-family: "Nexa Bold";
+  font-size: 1.3rem;
+}
+.scheduled_slots__sub_slots {
+  background-color: #eee;
+  padding: 1.5rem;
+}
+.scheduled_slots__sub_slots #disableSlots {
+  background-color: #0173b2;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-family: "Nexa Bold";
+}
+.scheduled_slots__sub_slots .time-slots {
+  display: flex;
+  align-items: center;
+  grid-gap: 0.5rem;
+  flex-wrap: wrap;
+  grid-gap: 1rem;
+  margin: 1rem 0rem;
+}
+.scheduled_slots__sub_slots .time-slots .slot {
+  display: block;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  font-family: "Nexa Bold";
+  color: #0173b2;
+}
+
+.recent_appointments__container {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 2rem;
+}
+.recent_appointments__heading {
+  font-family: "Nexa Bold";
+}
+.recent_appointments__table {
+  width: 100%;
+  border-collapse: collapse;
+  line-height: 6rem;
+}
+.recent_appointments__table tbody {
+  width: 100%;
+  background-color: #eee;
+}
+.recent_appointments__table tbody tr {
+  line-height: 4rem;
+}
+.recent_appointments__table tbody tr td {
+  text-align: center;
+  padding: 1rem;
+  font-family: "Nexa Bold";
+  vertical-align: middle;
+  font-size: 1.2rem;
+}
+.recent_appointments__table tbody tr td .actions {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 0.5rem;
+}
+.recent_appointments__table tbody tr td .appointment_edit_button {
+  text-align: center;
+  background-color: #0173b2;
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+  margin: auto;
+  border-radius: 50%;
+}
+.recent_appointments__table tbody tr td .appointment_edit_button i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.recent_appointments__table tbody tr .display_picture_container {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+}
+.recent_appointments__table tbody tr .display_picture_container img {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-75%);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.recent_appointments__table thead {
+  background-color: #ccc;
+  width: 100%;
+}
+.recent_appointments__table thead tr {
+  font-family: "Nexa Bold";
+  font-size: 1.5rem;
+}
+.recent_appointments__table thead tr th {
+  padding: 1rem 2rem;
+}
+
+.appointment_booked_details {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+.appointment_booked_details h4 {
+  font-family: "Nexa Bold";
+}
+.appointment_booked_details .appointment_booked_detail_container {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.appointment_booked_details .appointment_booked_detail_container--buttons {
+  flex-direction: row;
+  grid-gap: 1rem;
+}
+.appointment_booked_details .appointment_booked_detail_heading {
+  font-family: "Nexa Light";
+  font-size: 1.2rem;
+}
+.appointment_booked_details .appointment_booked_detail {
+  font-family: "Nexa Bold";
+  font-size: 1.4rem;
+}
+.appointment_booked_details .appointment_booked--options {
+  border: none;
+  padding: 1rem 1.5rem;
+  font-family: "Nexa Bold";
+}
+.appointment_booked_details .appointment_booked--cancel {
+  background-color: red;
+  color: white;
+}
+.appointment_booked_details .appointment_booked--reschedule {
+  background-color: #0173b2;
+  color: white;
+}
+
+.reschedule_container {
+  grid-template-columns: 1fr;
+}
+.reschedule_container .reschedule_container_card {
+  grid-template-columns: 1fr;
+}
+.reschedule_container .reschedule_appointment_wrapper {
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+}
+.reschedule_container .reschedule_appointment_heading h3 {
+  font-family: "Nexa Bold";
+}
+.reschedule_container .reschedule_appointment_details {
+  display: flex;
+  grid-gap: 2rem;
+}
+.reschedule_container .reschedule_appointment_detail {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
+}
+.reschedule_container .reschedule_appointment_detail_title {
+  font-size: 1.3rem;
+  font-family: "Nexa Light";
+}
+.reschedule_container .reschedule_appointment_detail_description {
+  font-size: 1.3rem;
+  font-family: "Nexa Bold";
+}
+
+.cancel_appointment_form_container .cancel_appointment {
+  height: 15rem;
+}
+.cancel_appointment_form_container .cancel_appointment .cancel_appointment_options_container {
+  display: flex;
+  width: 100%;
+  grid-gap: 1rem;
+}
+.cancel_appointment_form_container .cancel_appointment .cancel_appointment_options_container .cancel_appointment_options {
+  width: 100%;
+}
+.cancel_appointment_form_container .cancel_appointment .cancel_appointment_options_container .cancel_appointment_options button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  height: 100%;
+  background-color: #0173b2;
+  color: white;
+  font-family: "Nexa Bold";
+}
+.cancel_appointment_form_container .cancel_appointment .cancel_appointment_options_container .cancel_appointment_options--cancel button {
+  background-color: red;
+}
+
+.onboarding-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 2rem;
+  background-color: #9cbfda;
+}
+
+.doctor_onboarding_container {
+  width: 50rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  grid-gap: 1rem;
+}
+
+.doctor_onboarding_heading_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 1rem;
+}
+
+.doctor_onboarding_title h3 {
+  font-family: "Nexa Bold";
+  text-align: center;
+}
+
+.doctor_onboarding_form_container {
+  width: 100%;
+}
+.doctor_onboarding_form_container .doctor_onboarding_form {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+  border: none;
+}
+.doctor_onboarding_form_container .form_container__form__input_field--onboarding {
+  flex-direction: column;
+}
+.doctor_onboarding_para p {
+  text-align: center;
+  font-family: "Nexa Light";
+}
+
+.doctor_onboarding_image i {
+  font-size: 5rem;
+  color: #0173b2;
+}
+
+/*# sourceMappingURL=main.css.map */
