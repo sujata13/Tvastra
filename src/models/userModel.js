@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const doctorSchema = require('./doctorModel');
+const medicalReportSchema = require('./medicalReportModel').medicalReportSchema;
+
 
 const userSchema = new mongoose.Schema({
 	name: {
@@ -63,6 +65,7 @@ const userSchema = new mongoose.Schema({
 		enum: ['admin', 'user', 'doctor'],
 		default: 'user'
 	},
+	reports:[{type: medicalReportSchema}],
 	doctor: doctorSchema.doctorSchema
 },{
 	toJSON: { virtuals : true },
@@ -91,14 +94,16 @@ userSchema.virtual('slots', {
 userSchema.post('find', async function(docs,next){
 	const days = ['sunday','monday', 'tuesday', 'wednesday', 'thursday','friday', 'saturday'];
 	for await(let doc of docs){
-		await doc.populate('slots').execPopulate();
-		let subslotsArray = [[], [], [], [], [], [], []];
-	 	for(let i = 0; i < doc.slots.length; i++){
-			for(let j = 0; j < doc.slots[i].days.length; j++){
-				subslotsArray[days.indexOf(doc.slots[i].days[j])] = doc.slots[i].subSlots;
+		if(doc.role === 'doctor') {
+			await doc.populate('slots').execPopulate();
+			let subslotsArray = [[], [], [], [], [], [], []];
+		 	for(let i = 0; i < doc.slots.length; i++){
+				for(let j = 0; j < doc.slots[i].days.length; j++){
+					subslotsArray[days.indexOf(doc.slots[i].days[j])] = doc.slots[i].subSlots;
+				}
 			}
+			doc.doctor.subslots = subslotsArray;	
 		}
-		doc.doctor.subslots = subslotsArray;
 	}
 	next();
 });
