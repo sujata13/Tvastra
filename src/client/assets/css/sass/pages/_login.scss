@@ -1,0 +1,139 @@
+.login-body{
+	&-flex{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+	}
+	background-color: $light-blue;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	.navbar{
+		@media(min-width: $bp-tablet){
+			height: 8rem;	
+		}
+		@media(min-width: $bp-desktop){
+			height: 10rem;	
+		}	 
+	}
+}
+.form_container{
+	width: 90%;
+	height: 35rem;
+	background-color: white;
+	margin: auto;
+	margin: 3rem auto;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 1.5fr 5fr 1fr;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 0px 1.5rem rgba($dark-blue, .3);
+	@media(min-width: $bp-tablet) {
+		width: 60%;
+		margin: 5rem auto;
+	}
+	@media(min-width: $bp-desktop) {
+		width: 35%;
+	}
+	&__heading{
+		font-family: $nexa-bold;
+		font-size: 2rem;
+		color: $bright-blue;
+		justify-self: center;
+	}
+	&__form{
+		border-top: 1px solid #ccc;
+		height: 100%;
+		padding: 2rem 2rem;
+		display: grid;
+		grid-template-columns: 100%;
+		grid-gap: 1rem;
+		&__input_field{
+			position: relative;
+			i{
+				position: absolute;
+				right: 5%;
+				color: #ccc;
+				top: 30%;
+				font-size: 2rem;
+			}
+		}
+		input[type = text]{
+			width: 100%;
+			height: 100%;
+			border-radius: 0;
+			border-style: solid;
+			border-width: 1px;
+			border-color: #ccc;
+			padding: 1rem 2rem;
+			font-family: $nexa-bold;
+			font-size: 1.2rem;
+			color: #777;
+		}
+		// &__submit{
+		// 	position: relative;
+		// 	border: 2px solid rgba($light-blue, .9);
+		// 	border-radius: 5px;
+		// 	background-color: $dark-blue;
+		// 	&__text{
+		// 		color: white;
+		// 		font-family: $nexa-bold;
+		// 		text-transform: uppercase;
+		// 		letter-spacing: .5rem;		
+		// 	}
+		// 	&__icon{
+		// 		position: absolute;
+		// 		right: 5%;
+		// 		color:white;
+		// 	}
+		// }
+		&__submit{
+			border: none;
+			padding: 1rem 0rem;
+			border-radius: 0;
+			background-color: $dark-blue;
+			color: $background-color;
+			font-family: $nexa-bold;
+			letter-spacing: .5rem;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			position: relative;
+			&__icon{
+				position: absolute;
+				right: 5%;
+				font-size: 1.2rem;
+			}
+		}	
+	}
+	&__signup{
+		font-family: $nexa-bold;
+		color: #777;
+		font-size: 1.2rem;
+		span{
+			a{
+				text-decoration: none;
+				color: $bright-blue;
+				cursor: pointer;	
+			}
+		}
+		justify-self: center;
+	}
+}
+
+.copyright{
+	text-align: center;
+	padding-bottom: 2rem;
+	span{
+		text-align:center;
+		font-family: $nexa-bold;
+		font-size:1rem;
+		@media(min-width: $bp-tablet){
+			font-size: 1.2rem;
+		}
+		@media(min-width: $bp-desktop){
+			font-size: 1.2rem;
+		}
+	} 
+}
