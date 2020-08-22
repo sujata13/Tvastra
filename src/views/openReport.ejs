@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= session.user.name %></title>
+    <%- include('partials/head.ejs') %>     
+</head>
+<body class="user-dashboard">
+    
+    <% if(error) {%>
+        <% if(errorType === 'Success') { %>
+            <div class="error_container error_container--success">
+                <div class="col--1">
+                    <div class="error_container__icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>  
+                </div>
+                <div class="col--2">
+                    <div class="error_container__title heading-3">
+                        Success
+                    </div>
+                    <span class="para-1 error" id="cancelLogin"><%= error %> <!-- Valid Only for 60 Seconds. --></span> 
+                </div>
+                <div class="col--3">
+                    <div class="error_container__icon" id="cross">
+                        <i class="fas fa-times"></i>
+                    </div>      
+                </div>
+            </div>
+        <% } %>
+        <% if(errorType === 'Failure') { %>
+            <div class="error_container">
+                <div class="col--1">
+                    <div class="error_container__icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>  
+                </div>
+                <div class="col--2">
+                    <div class="error_container__title heading-3">
+                        Failure
+                    </div>
+                    <span class="para-1 error" id="cancelLogin"><%= error %> <!-- Valid Only for 60 Seconds. --></span> 
+                </div>
+                <div class="col--3">
+                    <div class="error_container__icon" id="cross">
+                        <i class="fas fa-times"></i>
+                    </div>      
+                </div>
+            </div>
+        <% } %>
+        <% if(errorType === 'Info') { %>
+            <div class="error_container error_container--info">
+                <div class="col--1">
+                    <div class="error_container__icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>  
+                </div>
+                <div class="col--2">
+                    <div class="error_container__title heading-3">
+                        Info
+                    </div>
+                    <span class="para-1 error" id="cancelLogin"><%= error %> <!-- Valid Only for 60 Seconds. --></span> 
+                </div>
+                <div class="col--3">
+                    <div class="error_container__icon" id="cross">
+                        <i class="fas fa-times"></i>
+                    </div>      
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+
+    
+    
+    <%- include('partials/header.ejs') %>
+
+    <div class="background-dashboard">
+    
+    <%- include('partials/admin_sidebar.ejs') %>
+    <div class="dashboard_content">
+        <section class="edit_profile edit_profile--doctor">
+            <div  id="edit-profile">
+            <div class="edit_profile_container">
+                <div class="edit_profile_heading edit_profile_heading--edit_profile">
+                    <h4 class="heading-4"></h4>
+                    <div class="save_button">
+                        <button onclick="toggleForm('<%= report.reports[0]._id %>')" type="submit" form="edit-profile">
+                            <span>
+                                Upload Record
+                            </span>
+                        </button>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <div class="record_container record_container_view">
+            <% for(let i = 0; i < report.reports[0].report_image_url.length; i++) { %>
+                <div class="record_view">
+                    <div class="record_title">
+                        <h4><%= report.reports[0].title  %></h4>
+                        <i class="fas fa-ellipsis-v" onclick="dotsOption(this)"></i>
+                        <ul style="display:none">
+                            <li onclick="delReport('<%= report.reports[0]._id %>', '<%= report.reports[0].report_image_url[i]._id %>')">Delete</li>
+                        </ul>
+                    </div>
+                    <div class="record_image">
+                        <img src="<%= report.reports[0].report_image_url[i].image_url[0].slice(1,) %>" onclick="modal_display(this)" alt="">
+
+                        <div id="myModal" class="modal doctor_details_modal display_none">
+                            <span class="close" id="close_show_report" onclick="modal_deactivate(this)">&times;</span>
+                            <%= report.reports[0].report_image_url[i].length %>
+                            
+                            <% for(let k=0;k< report.reports[0].report_image_url[i].image_url.length;k++) {%>
+                                <img class="modal-content" src="<%= report.reports[0].report_image_url[i].image_url[k].slice(1,)%>" style="padding: 1rem">
+                            <% } %>
+
+                        </div> 
+
+                    </div>
+                </div>
+
+            <% } %>
+        </div>
+
+        <form method= "POST" action="/delReport" id="delReport" style="display: none;">
+            <input type="text" name="report_id" class="report_id">
+            <input type="text" name="report_image" class="report_image">
+            
+        </form>
+        
+        <div class="doctor_details_modal doctor_details_modal--upload-records popup-medical display_none">
+            <form class="form_container form_container--first-login medicalForm" action="/update_record" method="POST" enctype="multipart/form-data">
+                <div class="photos">
+                    <div class="upload_display_picture_container">
+                        <label for="display_picture">Upload Your Record</label>
+                        <input type="file" name="medicalphoto[]" accept="image/*" id="_1" onchange="addAnother(this,event)"  class="display_picture_input" required multiple>   
+                    </div>  
+                </div>
+                <input class="report_id" name="report_id" style="display: none;">
+                <button type="submit" class="form_container__form__submit">
+                    <span class="form_container__form__submit__text">Submit</span>
+                    <span class="form_container__form__submit__icon"><i class="fas fa-arrow-right"></i></span>
+                </button>
+                <span class="close-form"><i class="fas fa-times"></i></span>
+            </form>
+        </div>
+        </section>
+    </div>
+    </div>
+     <script src="/index.js"></script>
+    <script>
+        const uploadRecords = () => {
+            console.log('upload records');
+            document.querySelector('.doctor_details_modal--upload-records').classList.remove('display_none');
+        }
+        const menuItemActive = document.querySelectorAll(`a[href='/${window.location.href.split('/')[3]}']`);
+        menuItemActive[1].parentElement.parentElement.classList.add('menu-item--active');
+    </script>
+    <script>
+    
+        var editNumber = document.getElementById('edit_phone_number');
+        let formContainer = document.querySelector('.doctor_details_modal--upload-records');
+        let closeForm = document.querySelector('.close-form');
+        closeForm.addEventListener('click', function(){
+            console.log(formContainer);
+            formContainer.classList.add('display_none');
+        });
+
+        var phoneNumber = document.querySelector('#phoneNumber');
+
+        var otpForm = `<h1 class="form_container__heading">OTP</h1>
+            <div class="form_container__form">
+                <h3 class="para-1 otp-message">We have sent One Time Password (OTP) to your registered Phone Number.</h3>
+                <div class="form_container__form__input_field">
+                    <!-- <input name="otp" id="otp" type="text" class="form_container__form__otp" required onKeyPress="if(this.value.length==4) return false;" maxlength="4"> -->
+                    <!-- <i class="fas fa-question-circle"></i> -->
+
+                    <input class="otpField" name="otp_1" id="codeBox1" type="number" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)" required>
+                    <input class="otpField" name="otp_2" id="codeBox2" type="number" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)" required>
+                    <input class="otpField" name="otp_3" id="codeBox3" type="number" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)" required>
+                    <input class="otpField" name="otp_4" id="codeBox4" type="number" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)" required>
+
+                </div>
+                <button onclick="verifyOTP()" type="submit" id="otpSubmit" class="form_container__form__submit">
+                    <span class="form_container__form__submit__text">Submit</span>
+                    <span class="form_container__form__submit__icon"><i class="fas fa-arrow-right"></i></span>
+                </button>
+                <span class="close-form"><i class="fas fa-times"></i></span>
+                </div>`
+        async function sendOTP() {
+            console.log(phoneNumber.value);
+            console.log(JSON.stringify(phoneNumber.value));
+            const res = await fetch('/change-phone-number', {
+                method: 'POST',
+                body: JSON.stringify({
+                    phoneNumber: phoneNumber.value
+                }),
+                headers: { 
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            console.log(res);
+            console.log(res.response);
+            const result = await res.json();
+            if(result.status === 'success'){
+                formContainer.innerHTML = '';
+                formContainer.innerHTML = otpForm;
+                formContainer.style.height = '30rem'; 
+            } 
+        }
+
+        async function verifyOTP(){
+            const otp_1 = document.querySelector(input[name="otp_1"]);
+            const otp_2 = document.querySelector(input[name="otp_2"]);
+            const otp_3 = document.querySelector(input[name="otp_3"]);
+            const otp_4 = document.querySelector(input[name="otp_4"]);
+            const res = await fetch('/change-phone-number-verify', {
+                method: 'POST',
+                body: JSON.stringify({
+                    otp_1: otp_1.value,
+                    otp_2: otp_2.value,
+                    otp_3: otp_3.value,
+                    otp_4: otp_4.value,
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+            const result = await res.json();
+            console.log(result);
+        }
+
+        
+
+    </script>
+
+    <script src="/dashboard.js"></script>
+    
+    <script src="/error.js"></script>
+
+</body>
+</html>
