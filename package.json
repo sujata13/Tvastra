@@ -30,6 +30,6 @@
     "sass": "^1.26.10"
   },
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "lite-server": "^2.6.1"
   }
 }
